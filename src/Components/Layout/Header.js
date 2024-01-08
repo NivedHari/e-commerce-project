@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import HeaderCart from "../Cart/HeaderCart";
+import { Link } from 'react-router-dom';
 
 const linkStyle = {
   color: "white",
@@ -13,17 +14,17 @@ const Header = (props) => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mx-auto">
           <Nav.Item>
-            <Nav.Link href="#" className="nav-link">
+            <Nav.Link as={Link} to="/" className="nav-link">
               HOME
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="#" className="nav-link active">
+            <Nav.Link as={Link} to="/store" className="nav-link active">
               STORE
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="#" className="nav-link">
+            <Nav.Link as={Link} to="/about" className="nav-link">
               ABOUT
             </Nav.Link>
           </Nav.Item>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-info p-4">
+    <footer className="bg-info p-4 ">
       <div className="container d-flex justify-content-between align-items-center">
         <div>
           <h4 className="text-white font-weight-bold">THE GENERICS</h4>

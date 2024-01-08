@@ -1,18 +1,24 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
+import HeaderCart from "../Cart/HeaderCart";
 
-const Header = () => {
+
+const linkStyle = {
+  color: 'white', 
+};
+
+const Header = (props) => {
   return (
-    <Navbar bg="dark" expand="lg" variant="dark" className="sticky-top">
+    <Navbar bg="dark" expand="lg" variant="dark" className="fixed-top">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mx-auto">
-          <Nav.Link href="#home">HOME</Nav.Link>
-          <Nav.Link href="#store">STORE</Nav.Link>
-          <Nav.Link href="#about">ABOUT</Nav.Link>
+          <Nav.Link href="#home" style={linkStyle}>HOME</Nav.Link>
+          <Nav.Link href="#store" style={linkStyle}>STORE</Nav.Link>
+          <Nav.Link href="#about" style={linkStyle}>ABOUT</Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link href="#cart" className="ml-auto">CART</Nav.Link>
+          <HeaderCart onClick={props.onClick}/>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

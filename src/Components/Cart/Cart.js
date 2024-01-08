@@ -1,42 +1,36 @@
 import { Button } from "react-bootstrap";
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Table } from "react-bootstrap";
+import CartContext from "../store/cart-context";
+import CartItem from "./CartItem";
 
-const Cart = () => {
-  const cartElements = [
-    {
-      title: "Colors",
+const Cart = (props) => {
+  const cartCtx = useContext(CartContext);
 
-      price: 100,
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
 
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+  const cartItemRemoveHandler =(id) => {
+    cartCtx.removeItem(id);
+  }
+  const cartItemAddHandler =(item) => {
+    cartCtx.addItem({...item, amount: 1});
+  }
 
-      quantity: 2,
-    },
-
-    {
-      title: "Black and white Colors",
-
-      price: 50,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-
-      quantity: 3,
-    },
-
-    {
-      title: "Yellow and Black Colors",
-
-      price: 70,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-
-      quantity: 1,
-    },
-  ];
+  const cartItems = (
+    <tr>
+      {cartCtx.items.map((item) => (
+        <CartItem
+      key={item.id}
+      title={item.title}
+      price={item.price}
+      amount={item.amount}
+      imageUrl={item.imageUrl} 
+      onRemove={cartItemRemoveHandler.bind(null, item.id)}
+      onAdd={cartItemAddHandler.bind(null, item)}
+    />
+      ))}
+    </tr>
+  );
 
   return (
     <Container>
@@ -47,37 +41,19 @@ const Cart = () => {
               <th>ITEM</th>
               <th>PRICE</th>
               <th>QUANTITY</th>
-              <th>-</th>
+              <button onClick={props.onClick}>x</button>
             </tr>
           </thead>
-          <tbody>
-            {cartElements.map((item) => (
-              <tr key={item.title}>
-                <td className="d-flex">
-                  <img
-                    src={item.imageUrl}
-                    alt="Albums"
-                    width="50"
-                    height="50"
-                  />
-                  {item.title}
-                </td>
-                <td>${item.price}</td>
-                <td>1</td>
-
-                <td>
-                  <button className="btn btn-danger">REMOVE</button>
-                </td>
-              </tr>
-            ))}
+          <tbody >
+            {cartItems}
           </tbody>
         </Table>
       </div>
       <div className="text-right">
-        <strong>Total</strong>
+        <strong>Total : </strong>
+        <span>{totalAmount}</span>
       </div>
 
-      {/* Purchase Button */}
       <div className="text-center">
         <Button variant="primary">PURCHASE</Button>
       </div>

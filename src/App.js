@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Layout/Header";
-import Heading from "./Components/Heading/Heading";
 import Products from "./Components/Products/Products";
-import Footer from "./Components/Layout/Footer";
 import Cart from "./Components/Cart/Cart";
 import CartProvider from "./../src/Components/store/CartProvider";
 import About from "./Components/Pages/About";
+import Home from "./Components/Pages/Home";
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
@@ -42,19 +41,18 @@ const App = () => {
     <Router>
       <CartProvider>
         <Header onClick={cartHandler} />
-        
-        <Heading />
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/store" element={<Products />} />
           <Route path="/" element={<Products />} />
+          <Route path="/home" element={<Home/>}/>
         </Routes>
         
         <div style={backdropStyle}></div>
         <div style={cartStyle}>
           {showCart && <Cart onClick={cartHandler} />}
         </div>
-        <Footer/>
+        
 
       </CartProvider>
     </Router>

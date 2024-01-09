@@ -1,6 +1,8 @@
 import Button from "react-bootstrap/Button";
 import CartContext from "../store/cart-context";
 import { useContext } from "react";
+import Heading from "../Heading/Heading";
+import Footer from "../Layout/Footer";
 
 const productsArr = [
   {
@@ -47,6 +49,8 @@ const Products = () => {
   };
 
   return (
+    <>
+    <Heading/>
     <div className="container">
       <h2 className="text-center mt-4 mb-4">Colours</h2>
       <div className="row justify-content-center">
@@ -96,6 +100,8 @@ const Products = () => {
         <Button variant="secondary">See the Cart</Button>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

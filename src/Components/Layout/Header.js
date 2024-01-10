@@ -19,13 +19,18 @@ const Header = (props) => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} to="/store" className="nav-link active">
+            <Nav.Link as={Link} to="/store" className="nav-link ">
               STORE
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link as={Link} to="/about" className="nav-link">
               ABOUT
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link as={Link} to="/contactus" className="nav-link">
+              CONTACT US
             </Nav.Link>
           </Nav.Item>
         </Nav>

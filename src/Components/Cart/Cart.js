@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import CartContext from "../store/cart-context";
 import CartItem from "./CartItem";
+import { Button } from "react-bootstrap";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
@@ -10,7 +11,7 @@ const Cart = (props) => {
   const cartItemRemoveHandler = (id) => {
     cartCtx.removeItem(id);
   };
-  
+
   const cartItemAddHandler = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
   };
@@ -18,13 +19,19 @@ const Cart = (props) => {
   return (
     <section>
       <div className="container h-100 py-5">
+        <div className="position-absolute top-0 end-0 m-3">
+          <Button onClick={props.onClick} variant="outline-danger">X</Button>
+        </div>
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col">
             <div className="table-responsive">
               <table className="table">
                 <thead>
                   <tr>
-                    <th scope="col" className="h5">
+                    <h1>Cart</h1>
+                  </tr>
+                  <tr>
+                    <th colSpan="2" scope="col" className="h5">
                       ITEM
                     </th>
                     <th scope="col">PRICE</th>
@@ -45,6 +52,13 @@ const Cart = (props) => {
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div className="text-right">
+              <strong>Total : </strong>
+              <span>{totalAmount}</span>
+            </div>
+            <div className="text-center">
+              <Button variant="primary">PURCHASE</Button>
             </div>
           </div>
         </div>

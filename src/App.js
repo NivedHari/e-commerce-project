@@ -7,6 +7,7 @@ import Cart from "./Components/Cart/Cart";
 import CartProvider from "./../src/Components/store/CartProvider";
 import About from "./Components/Pages/About";
 import Home from "./Components/Pages/Home";
+import ContactUs from "./Components/Pages/ContactUs";
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/store" element={<Products />} />
           <Route path="/" element={<Products />} />
           <Route path="/home" element={<Home/>}/>
+          <Route path="/contactus" element={<ContactUs/>}/>
         </Routes>
         
         <div style={backdropStyle}></div>

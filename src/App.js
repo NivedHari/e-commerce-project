@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Layout/Header";
 import Products from "./Components/Products/Products";
@@ -8,6 +8,7 @@ import CartProvider from "./../src/Components/store/CartProvider";
 import About from "./Components/Pages/About";
 import Home from "./Components/Pages/Home";
 import ContactUs from "./Components/Pages/ContactUs";
+import ProductDetails from "./Components/Products/ProductDetails";
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
@@ -41,21 +42,25 @@ const App = () => {
   return (
     <Router>
       <CartProvider>
-        <Header onClick={cartHandler} />
-        <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/store" element={<Products />} />
-          <Route path="/" element={<Products />} />
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/contactus" element={<ContactUs/>}/>
-        </Routes>
-        
+        <div>
+          <Header onClick={cartHandler} />
+          <main>
+            <Switch>
+              <Route path="/about">
+              <About /></Route>
+              <Route path="/store"><Products/></Route>
+              <Route path="/" exact><Home/></Route>
+              <Route path="/home"><Home/></Route>
+              <Route path="/contactus" exact><ContactUs/></Route>
+              <Route path="/products/:productId"><ProductDetails/></Route>
+            </Switch>
+          </main>
+        </div>
+
         <div style={backdropStyle}></div>
         <div style={cartStyle}>
           {showCart && <Cart onClick={cartHandler} />}
         </div>
-        
-
       </CartProvider>
     </Router>
   );

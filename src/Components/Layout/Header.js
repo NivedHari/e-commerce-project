@@ -33,6 +33,11 @@ const Header = (props) => {
               CONTACT US
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link as={Link} to="login" className="nav-link">
+              LOGIN
+            </Nav.Link>
+          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
       <div className="position-fixed top-0 end-0 m-1">

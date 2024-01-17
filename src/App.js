@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState,useContext } from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Layout/Header";
 import Products from "./Components/Products/Products";
@@ -9,9 +9,14 @@ import About from "./Components/Pages/About";
 import Home from "./Components/Pages/Home";
 import ContactUs from "./Components/Pages/ContactUs";
 import ProductDetails from "./Components/Products/ProductDetails";
+import Login from "./Components/Pages/Login";
+import { AuthContextProvider } from "./Components/store/auth-context";
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import AuthContext from "./Components/store/auth-context";
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
+  const authCtx = useContext(AuthContext);
 
   const cartHandler = () => {
     setShowCart(!showCart);
@@ -40,19 +45,36 @@ const App = () => {
   };
 
   return (
-    <Router>
+    <AuthContextProvider>
       <CartProvider>
         <div>
           <Header onClick={cartHandler} />
           <main>
             <Switch>
               <Route path="/about">
-              <About /></Route>
-              <Route path="/store"><Products/></Route>
-              <Route path="/" exact><Home/></Route>
-              <Route path="/home"><Home/></Route>
-              <Route path="/contactus" exact><ContactUs/></Route>
-              <Route path="/products/:productId"><ProductDetails/></Route>
+                <About />
+              </Route>
+              <Route path="/store">
+                <Products />
+              </Route>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <Route path="/contactus" exact>
+                <ContactUs />
+              </Route>
+              <Route path="/products/:productId">
+                <ProductDetails />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="*">
+                <Redirect to="/"></Redirect>
+              </Route>
             </Switch>
           </main>
         </div>
@@ -62,7 +84,7 @@ const App = () => {
           {showCart && <Cart onClick={cartHandler} />}
         </div>
       </CartProvider>
-    </Router>
+    </AuthContextProvider>
   );
 };
 

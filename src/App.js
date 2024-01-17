@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Layout/Header";
@@ -10,13 +10,13 @@ import Home from "./Components/Pages/Home";
 import ContactUs from "./Components/Pages/ContactUs";
 import ProductDetails from "./Components/Products/ProductDetails";
 import Login from "./Components/Pages/Login";
-import { AuthContextProvider } from "./Components/store/auth-context";
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import AuthContext from "./Components/store/auth-context";
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
   const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
 
   const cartHandler = () => {
     setShowCart(!showCart);
@@ -45,46 +45,39 @@ const App = () => {
   };
 
   return (
-    <AuthContextProvider>
-      <CartProvider>
-        <div>
-          <Header onClick={cartHandler} />
-          <main>
-            <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/store">
-                <Products />
-              </Route>
-              <Route path="/" exact>
-                <Home />
-              </Route>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/contactus" exact>
-                <ContactUs />
-              </Route>
-              <Route path="/products/:productId">
-                <ProductDetails />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="*">
-                <Redirect to="/"></Redirect>
-              </Route>
-            </Switch>
-          </main>
-        </div>
+    <CartProvider>
+      <div>
+        <Header onClick={cartHandler} />
+        <main>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/store">
+              {isLoggedIn && <Products />}
+              {!isLoggedIn && <Redirect to="/login"></Redirect>}
+            </Route>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/contactus" exact>
+              <ContactUs />
+            </Route>
+            <Route path="/products/:productId">
+              <ProductDetails />
+            </Route>
+            {!isLoggedIn && <Route path="/login"><Login /></Route>}
+            <Route path="*"><Redirect to="/store"></Redirect></Route>
+          </Switch>
+        </main>
+      </div>
 
-        <div style={backdropStyle}></div>
-        <div style={cartStyle}>
-          {showCart && <Cart onClick={cartHandler} />}
-        </div>
-      </CartProvider>
-    </AuthContextProvider>
+      <div style={backdropStyle}></div>
+      <div style={cartStyle}>{showCart && <Cart onClick={cartHandler} />}</div>
+    </CartProvider>
   );
 };
 

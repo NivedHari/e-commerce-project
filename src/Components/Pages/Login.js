@@ -29,6 +29,7 @@ const Login = () => {
     })
       .then((res) => {
         history.replace('/store');
+    
         if (res.ok) {
           return res.json();
         } else {
@@ -47,7 +48,7 @@ const Login = () => {
       .catch((err) => {
         alert(err.message);
       });
-    console.log(enteredEmail);
+    console.log(authCtx);
   };
 
   return (

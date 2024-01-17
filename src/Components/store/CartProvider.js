@@ -1,5 +1,9 @@
+import AuthContext from "./auth-context";
 import CartContext from "./cart-context";
-import { useReducer } from "react";
+import { useReducer,useContext,useState } from "react";
+import axios from "axios";
+
+
 
 const defaultCartState = {
   items: [],
@@ -61,12 +65,22 @@ const cartReducer = (state, action) => {
 };
 
 const CartProvider = (props) => {
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email;
+  const isLoggedIn = authCtx.isLoggedIn;
+  let url=`https://crudcrud.com/api/f7380b7548bf472e8633ee9e949b3b9e/${userEmail}`;
   const [cartState, dispatchCartAction] = useReducer(
     cartReducer,
     defaultCartState
   );
-  const addItemToCartHandler = (item) => {
+  const addItemToCartHandler = async (item) => {
     dispatchCartAction({ type: "ADD", item: item });
+
+    try {
+      await axios.post(url, item);
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
   };
 
   const removeItemFromCartHandler = (id) => {

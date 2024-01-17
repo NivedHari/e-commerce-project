@@ -43,7 +43,8 @@ const Login = () => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
+        const cleanedMail=`${enteredEmail.replace(/\.|@/g, "")}`;
+        authCtx.login(data.idToken,cleanedMail);
       })
       .catch((err) => {
         alert(err.message);

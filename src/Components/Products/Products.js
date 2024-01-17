@@ -4,38 +4,13 @@ import { useContext } from "react";
 import Heading from "../Heading/Heading";
 import Footer from "../Layout/Footer";
 import { Link } from "react-router-dom";
-import {productArray} from './ProductArray';
-
-// const productsArr = [
-//   {
-//     id: "n1",
-//     title: "Colors",
-//     price: 100,
-//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-//   },
-//   {
-//     id: "n2",
-//     title: "Black and white Colors",
-//     price: 50,
-//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-//   },
-//   {
-//     id: "n3",
-//     title: "Yellow and Black Colors",
-//     price: 70,
-//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-//   },
-//   {
-//     id: "n4",
-//     title: "Blue Color",
-//     price: 100,
-//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-//   },
-// ];
+import { productArray } from "./ProductArray";
+import AuthContext from "../store/auth-context";
 
 const Products = (props) => {
   const productsArr = productArray;
   const cartCtx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
 
   const addToCartHandler = (product) => {
     cartCtx.addItem({
@@ -45,7 +20,7 @@ const Products = (props) => {
       imageUrl: product.imageUrl,
       amount: 1,
     });
-    console.log(cartCtx.items);
+    console.log(authCtx.email);
   };
 
   return (

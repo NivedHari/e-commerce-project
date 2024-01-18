@@ -1,17 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Layout/Header";
-import Products from "./Components/Products/Products";
 import Cart from "./Components/Cart/Cart";
 import CartProvider from "./../src/Components/store/CartProvider";
 import About from "./Components/Pages/About";
 import Home from "./Components/Pages/Home";
 import ContactUs from "./Components/Pages/ContactUs";
 import ProductDetails from "./Components/Products/ProductDetails";
-import Login from "./Components/Pages/Login";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import AuthContext from "./Components/store/auth-context";
+
+const Products = lazy(() => import("./Components/Products/Products"));
+
+const Login = lazy(() => import("./Components/Pages/Login"));
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
@@ -54,7 +56,11 @@ const App = () => {
               <About />
             </Route>
             <Route path="/store">
-              {isLoggedIn && <Products />}
+              {isLoggedIn &&(
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Products />
+                </Suspense>
+              )}
               {!isLoggedIn && <Redirect to="/login"></Redirect>}
             </Route>
             <Route path="/" exact>
@@ -69,7 +75,7 @@ const App = () => {
             <Route path="/products/:productId">
               <ProductDetails />
             </Route>
-            {!isLoggedIn && <Route path="/login"><Login /></Route>}
+            {!isLoggedIn && <Route path="/login"><Suspense fallback={<div>Loading...</div>}><Login /></Suspense></Route>}
             <Route path="*"><Redirect to="/store"></Redirect></Route>
           </Switch>
         </main>

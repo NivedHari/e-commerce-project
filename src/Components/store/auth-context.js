@@ -23,7 +23,7 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
     console.log(email)
-    // setTimeout(() => logoutHandler(), 300000);
+    setTimeout(() => logoutHandler(), 300000);
   };
 
   const logoutHandler = () => {

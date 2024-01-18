@@ -1,6 +1,6 @@
 export const productArray=[
     {
-
+        id: "n1",
         title: 'Album 1',
 
         price: 100,
@@ -10,7 +10,7 @@ export const productArray=[
     },
 
     {
-
+        id:"n2",
         title: 'Album 2',
 
         price: 50,
@@ -20,7 +20,7 @@ export const productArray=[
     },
 
     {
-
+        id:"n3",
         title: 'Album 3',
 
         price: 70,
@@ -30,7 +30,7 @@ export const productArray=[
     },
 
     {
-
+        id:"n4",
         title: 'Album 4',
 
         price: 125,

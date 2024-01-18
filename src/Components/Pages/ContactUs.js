@@ -43,8 +43,8 @@ const ContactUs = () => {
 
   return (
     <>
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <form onSubmit={submitHandler} className="border p-5">
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-dark">
+      <form onSubmit={submitHandler} className="border p-5 bg-dark text-light">
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name:

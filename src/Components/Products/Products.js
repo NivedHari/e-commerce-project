@@ -20,7 +20,7 @@ const Products = (props) => {
       imageUrl: product.imageUrl,
       amount: 1,
     });
-    console.log(authCtx.email);
+    console.log(cartCtx.items);
   };
 
   return (

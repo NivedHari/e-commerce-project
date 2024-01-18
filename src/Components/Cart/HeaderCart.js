@@ -11,7 +11,7 @@ const HeaderCart = (props) => {
   return (
     <Button variant="light" onClick={props.onClick} className="p-1 m-1" style={{ width: "150px", height: "30px", lineHeight: "20px" }}>
       <div>
-        CART <p class="badge bg-dark">{numberOfCartItems}</p>
+        CART <p className="badge bg-dark">{numberOfCartItems}</p>
       </div>
     </Button>
   );
